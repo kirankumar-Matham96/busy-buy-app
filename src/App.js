@@ -6,6 +6,7 @@ import { ItemsContextProvider } from "./customContexts/itemsContext";
 
 import "./App.css";
 import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
 
 function App() {
   const router = createBrowserRouter([
@@ -15,6 +16,7 @@ function App() {
       children: [
         { path: "", element: <Home /> },
         { path: "/login", element: <Login /> },
+        { path: "/register", element: <Register /> },
       ],
     },
   ]);

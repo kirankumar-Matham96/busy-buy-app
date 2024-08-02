@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-// import { useFirestoreAuth } from "../../customHooks/useFirestoreAuth";
 import { useAuth } from "../../customContexts/authContext";
 import loginStyles from "./index.module.css";
 
-export const Login = () => {
+export const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signIn, loading, error } = useAuth();
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const { signUp, loading, error } = useAuth();
   const navigate = useNavigate();
 
   const changeEmailHandle = (e) => {
@@ -18,12 +18,22 @@ export const Login = () => {
     setPassword(e.target.value);
   };
 
+  const changeConfirmPasswordHandle = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
   const formSubmitHandle = async (e) => {
     e.preventDefault();
-    const isSignedIn = await signIn(email, password);
-    setEmail("");
-    setPassword("");
-    isSignedIn && navigate("/");
+    if (password === confirmPassword) {
+      signUp(email, password);
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      navigate("/login");
+      return;
+    } else {
+      alert("Confirm password did not match!");
+    }
   };
 
   return (
@@ -33,7 +43,7 @@ export const Login = () => {
       ) : (
         <div className={loginStyles.container}>
           <p className={loginStyles.error}>{error}</p>
-          <h1 className={loginStyles.heading}>Sign In</h1>
+          <h1 className={loginStyles.heading}>Sign Up</h1>
           <form className={loginStyles.form} onSubmit={formSubmitHandle}>
             <input
               className={loginStyles.input}
@@ -49,10 +59,17 @@ export const Login = () => {
               onChange={changePasswordHandle}
               placeholder="Enter Password"
             />
-            <button className={loginStyles.btn}>Sign In</button>
+            <input
+              className={loginStyles.input}
+              type="password"
+              value={confirmPassword}
+              onChange={changeConfirmPasswordHandle}
+              placeholder="Confirm Password"
+            />
+            <button className={loginStyles.btn}>Sign Up</button>
           </form>
-          <Link to="/register">
-            <p className={loginStyles.link}>Or SignUp instead</p>
+          <Link to="/login">
+            <p className={loginStyles.link}>Have an account already?</p>
           </Link>
         </div>
       )}
