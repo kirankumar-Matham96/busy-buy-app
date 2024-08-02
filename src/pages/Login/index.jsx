@@ -33,6 +33,7 @@ export const Login = () => {
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+      navigate("/login");
       return;
     }
     const isSignedIn = await signIn(email, password);

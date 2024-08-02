@@ -12,7 +12,6 @@ const categories = [
 export const Filter = () => {
   const { addFiltersHandle } = useItems();
   const [selectedCategories, setSelectedCategories] = useState([]);
-  // let selectedCategories = [];
 
   useEffect(() => {
     addFiltersHandle(selectedCategories);
@@ -35,7 +34,6 @@ export const Filter = () => {
 
   return (
     <div className={filterStyles.filter}>
-      {/* {console.log("selectedCategories => ", selectedCategories)} */}
       <div className={filterStyles.priceStyle}>
         <h3 className={filterStyles.heading}>Filter</h3>
         <p>Price: </p>

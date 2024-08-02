@@ -5,7 +5,7 @@ import { useAuth } from "../../customContexts/authContext";
 import navStyles from "./index.module.css";
 
 export const Navbar = () => {
-  const { loggedIn, loading, setLoggedIn } = useAuth();
+  const { loggedIn, loading, logOut } = useAuth();
   console.log("loggedIn ===> ", loggedIn);
   const navigate = useNavigate();
 
@@ -14,7 +14,8 @@ export const Navbar = () => {
   }, [loggedIn]);
 
   const logoutHandle = () => {
-    setLoggedIn(false);
+    // setLoggedIn(false);
+    logOut();
     navigate("/");
   };
 

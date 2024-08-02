@@ -49,7 +49,6 @@ export const ItemsContextProvider = ({ children }) => {
 
   return (
     <>
-      {console.log("filteredProducts => ", filteredProducts)}
       <itemsContext.Provider
         value={{ products: filteredProducts, loading, error, addFiltersHandle }}
       >
