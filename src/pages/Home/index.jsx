@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Filter } from "../../components/Filter";
 import { ItemsContainer } from "../../components/ItemsContainer";
 import homeStyles from "./index.module.css";
 
 export const Home = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const searchHandle = (e) => {
+    e.preventDefault();
+    setSearchTerm(e.target.value.toLowerCase());
+  };
+
   return (
     <div className={homeStyles.bgContainer}>
       <div className={homeStyles.filterContainer}>
@@ -12,13 +19,14 @@ export const Home = () => {
       <div className={homeStyles.mainContainer}>
         <div className={homeStyles.searchInputContainer}>
           <input
+            onChange={searchHandle}
             className={homeStyles.search}
             type="search"
             placeholder="Search By Name"
           />
         </div>
         <div>
-          <ItemsContainer />
+          <ItemsContainer searchTerm={searchTerm} />
         </div>
       </div>
     </div>
