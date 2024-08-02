@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { useFirestoreAuth } from "../../customHooks/useFirestoreAuth";
+import { useNavigate } from "react-router-dom";
+// import { useFirestoreAuth } from "../../customHooks/useFirestoreAuth";
+import { useAuth } from "../../customContexts/authContext";
 import loginStyles from "./index.module.css";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { signUp, signIn, loading, error } = useFirestoreAuth();
+  const { signUp, signIn, loading, error } = useAuth();
   const [isSignUp, setIsSignUp] = useState(false);
+  const navigate = useNavigate();
 
   const changeEmailHandle = (e) => {
     setEmail(e.target.value);
@@ -32,9 +35,10 @@ export const Login = () => {
       setConfirmPassword("");
       return;
     }
-    signIn(email, password);
+    const isSignedIn = await signIn(email, password);
     setEmail("");
     setPassword("");
+    isSignedIn && navigate("/");
   };
 
   return (
