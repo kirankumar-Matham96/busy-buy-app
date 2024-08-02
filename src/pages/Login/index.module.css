@@ -1,0 +1,47 @@
+.container {
+  width: 280px;
+  margin: 8rem auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  margin-bottom: 1rem;
+}
+
+.error {
+  color: red;
+}
+
+.input {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: lightcyan;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid cyan;
+}
+
+.btn {
+  padding: 1rem;
+  color: white;
+  border-radius: 8px;
+  background-color: purple;
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+  border: none;
+  cursor: pointer;
+}
+.link {
+  align-self: flex-start;
+  cursor: pointer;
+}
+
+.link:hover {
+  font-weight: 500;
+}

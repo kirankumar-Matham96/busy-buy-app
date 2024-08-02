@@ -11,7 +11,11 @@ export const Home = () => {
       </div>
       <div className={homeStyles.mainContainer}>
         <div className={homeStyles.searchInputContainer}>
-          <h1>SearchBar</h1>
+          <input
+            className={homeStyles.search}
+            type="search"
+            placeholder="Search By Name"
+          />
         </div>
         <div>
           <ItemsContainer />

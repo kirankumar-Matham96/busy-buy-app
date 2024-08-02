@@ -1,19 +1,28 @@
 .bgContainer {
-  /* border: 1px solid red; */
   display: flex;
   justify-content: space-between;
-  padding: 0 8rem 0 4rem;
+  padding: 0 8rem 4rem 4rem;
 }
 .filterContainer {
   width: 20%;
-  /* border: 1px solid red; */
+  margin-top: 10rem;
+  position: sticky;
 }
 .mainContainer {
   right: 0;
   width: 79%;
-  /* border: 1px solid red; */
 }
 .searchInputContainer {
   display: flex;
   justify-content: center;
+}
+.search {
+  width: 40%;
+  padding: 1.2rem 1.5rem;
+  border-radius: 16px;
+  outline: none;
+  border: none;
+  background-color: lightcyan;
+  font-size: 20px;
+  margin-bottom: 3rem;
 }
