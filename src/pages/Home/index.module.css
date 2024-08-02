@@ -1,17 +1,17 @@
 .bgContainer {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: space-between;
   padding: 0 8rem 0 4rem;
 }
 .filterContainer {
   width: 20%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .mainContainer {
   right: 0;
-  width: 80%;
-  border: 1px solid red;
+  width: 79%;
+  /* border: 1px solid red; */
 }
 .searchInputContainer {
   display: flex;

@@ -1,0 +1,33 @@
+.card {
+  /* min-width: 300px; */
+  width: 30%;
+  /* height: 500px; */
+  /* border: 1px solid red; */
+  border-radius: 8px;
+  box-shadow: 0 0 8px -1px #afaeae;
+  padding: 2rem;
+}
+.image {
+  width: 100%;
+}
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin-bottom: 1rem;
+}
+.price {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.btn {
+  background-color: purple;
+  color: white;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.3rem;
+}
