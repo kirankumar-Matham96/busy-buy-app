@@ -1,0 +1,40 @@
+.container {
+  /* border: 1px solid red; */
+  padding: 1rem 8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 5px -5px #d1d1d1;
+}
+.navBrand {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.navRight {
+  /* border: 1px solid red; */
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 16%;
+  /* padding: 0 1rem; */
+}
+
+.btn {
+  border: none;
+  /* border: 1px solid red; */
+
+  outline: none;
+  cursor: pointer;
+  background: none;
+  width: 6.5rem;
+  height: 2.3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.btn > img {
+  height: 100%;
+}
