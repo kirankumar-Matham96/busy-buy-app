@@ -1,16 +1,18 @@
 .bgContainer {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 8rem 4rem 4rem;
+  align-items: center;
+  padding: 0 8rem 0 9rem;
+  position: relative;
 }
 .filterContainer {
-  width: 20%;
+  width: 16%;
   margin-top: 10rem;
-  position: sticky;
+  position: fixed;
+  top: 10;
+  left: 0;
 }
 .mainContainer {
-  right: 0;
-  width: 79%;
+  width: 78%;
+  margin: 0 auto;
 }
 .searchInputContainer {
   display: flex;

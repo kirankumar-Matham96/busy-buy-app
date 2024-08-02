@@ -5,7 +5,7 @@
   gap: 3rem; */
 
   display: grid;
-  grid-template-columns: repeat(3, 30%);
+  grid-template-columns: repeat(3, 31%);
   grid-template-rows: repeat(auto-fill, 1fr);
   gap: 2rem;
 }
