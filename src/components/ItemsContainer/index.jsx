@@ -7,7 +7,6 @@ export const ItemsContainer = ({ searchTerm }) => {
   const { products, loading, error } = useItems();
 
   const [filteredProducts, setFilteredProducts] = useState([]);
-  // const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     products &&
@@ -15,11 +14,6 @@ export const ItemsContainer = ({ searchTerm }) => {
         products.filter((item) => item.title.toLowerCase().includes(searchTerm))
       );
   }, [products, searchTerm]);
-
-  // const searchHandle = (e) => {
-  //   e.preventDefault();
-  //   setSearchTerm(e.target.value);
-  // };
 
   return (
     <>
@@ -32,7 +26,6 @@ export const ItemsContainer = ({ searchTerm }) => {
         "Loading..."
       ) : (
         <div className={cardContainerStyles.container}>
-          {/* {console.log("products in the container => ", products)} */}
           {filteredProducts &&
             filteredProducts.map((item) => {
               return <ItemCard key={item.id} item={item} />;
