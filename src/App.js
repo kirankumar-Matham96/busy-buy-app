@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Navbar } from "./components/Navbar";
 import { AuthContextProvider } from "./customContexts/authContext";
+import { ItemsContextProvider } from "./customContexts/itemsContext";
 
 import "./App.css";
 import { Login } from "./pages/Login";
@@ -20,7 +21,9 @@ function App() {
 
   return (
     <AuthContextProvider>
-      <RouterProvider router={router} />
+      <ItemsContextProvider>
+        <RouterProvider router={router} />
+      </ItemsContextProvider>
     </AuthContextProvider>
   );
 }

@@ -1,12 +1,13 @@
 import React from "react";
 import cardStyles from "./index.module.css";
 
-export const ItemCard = () => {
+export const ItemCard = ({ item }) => {
+  const { id, title, price, image } = item;
   return (
     <div className={cardStyles.card}>
-      <img className={cardStyles.image} src="https://m.media-amazon.com/images/I/61yMAsvoVSL._AC_UY1100_.jpg" alt="bag" />
-      <p className={cardStyles.title}>Title</p>
-      <p className={cardStyles.price}>₹ 1099</p>
+      <img className={cardStyles.image} src={image} alt={title} />
+      <p className={cardStyles.title}>{title}</p>
+      <p className={cardStyles.price}>₹ {price}</p>
       <button className={cardStyles.btn}>Add To Cart</button>
     </div>
   );
