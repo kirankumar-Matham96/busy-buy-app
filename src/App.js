@@ -3,12 +3,15 @@ import { Home } from "./pages/Home";
 import { Navbar } from "./components/Navbar";
 import { AuthContextProvider } from "./customContexts/authContext";
 import { ItemsContextProvider } from "./customContexts/itemsContext";
+import { useProtectedRoute } from "./customHooks/useProtectedRoute";
 
 import "./App.css";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
-
-function App() {
+import { Cart } from "./pages/Cart";
+import { Orders } from "./pages/Orders";
+const App = () => {
+  console.log("register => ", useProtectedRoute(<Register />));
   const router = createBrowserRouter([
     {
       path: "/",
@@ -16,7 +19,18 @@ function App() {
       children: [
         { path: "", element: <Home /> },
         { path: "/login", element: <Login /> },
-        { path: "/register", element: <Register /> },
+        {
+          path: "/register",
+          element: useProtectedRoute(<Register />),
+        },
+        {
+          path: "/orders",
+          element: useProtectedRoute(<Orders />),
+        },
+        {
+          path: "/cart",
+          element: useProtectedRoute(<Cart />),
+        },
       ],
     },
   ]);
@@ -28,6 +42,6 @@ function App() {
       </ItemsContextProvider>
     </AuthContextProvider>
   );
-}
+};
 
 export default App;

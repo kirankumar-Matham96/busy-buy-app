@@ -42,7 +42,7 @@ export const Navbar = () => {
             </button>
           </Link>
 
-          <Link to="/">
+          <Link to="/orders">
             <button className={navStyles.btn}>
               <img
                 src="https://cdn-icons-png.flaticon.com/128/9422/9422816.png"
@@ -52,7 +52,7 @@ export const Navbar = () => {
             </button>
           </Link>
 
-          <Link to="/">
+          <Link to="/cart">
             <button className={navStyles.btn}>
               <img
                 src="https://cdn-icons-png.flaticon.com/128/4290/4290854.png"
