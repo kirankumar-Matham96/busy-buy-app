@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Filter } from "../../components/Filter";
 import { ItemsContainer } from "../../components/ItemsContainer";
 import homeStyles from "./index.module.css";
+import { useItems } from "../../customContexts/itemsContext";
 
 export const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const { products, loading, error } = useItems();
 
   const searchHandle = (e) => {
     e.preventDefault();
@@ -26,7 +28,12 @@ export const Home = () => {
           />
         </div>
         <div>
-          <ItemsContainer searchTerm={searchTerm} />
+          <ItemsContainer
+            searchTerm={searchTerm}
+            products={products}
+            loading={loading}
+            error={error}
+          />
         </div>
       </div>
     </div>

@@ -20,16 +20,7 @@ export const ItemsContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState([]);
-
-  const addFiltersHandle = (filters) => {
-    setFilteredProducts(
-      products.filter((product) =>
-        filters.length > 0
-          ? filters.includes(product.category.toLowerCase())
-          : products
-      )
-    );
-  };
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -47,10 +38,77 @@ export const ItemsContextProvider = ({ children }) => {
     fetchProducts();
   }, []);
 
+  const addFiltersHandle = (filters) => {
+    setFilteredProducts(
+      products.filter((product) =>
+        filters.length > 0
+          ? filters.includes(product.category.toLowerCase())
+          : products
+      )
+    );
+  };
+
+  const addToCartHandle = (itemId) => {
+    const newItem = products.find((item) => item.id === itemId);
+
+    const index = cartItems.findIndex((item) => item.id === itemId);
+
+    if (index === -1) {
+      newItem.quantity = 1;
+      setCartItems([...cartItems, newItem]);
+    } else {
+      cartItems[index].quantity++;
+      setCartItems(cartItems);
+    }
+  };
+
+  const removeFromCartHandle = (itemId) => {
+    const index = cartItems.findIndex((item) => item.id === itemId);
+    index !== -1 && cartItems.splice(index, 1);
+    setCartItems(cartItems);
+  };
+
+  const increaseQuantityHandle = (itemId) => {
+    setCartItems((prevState) =>
+      prevState.map((item) =>
+        item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+
+  const decreaseQuantityHandle = (itemId) => {
+    // const index = cartItems.findIndex((item) => item.id === itemId);
+
+    // if (index !== -1 && cartItems[index].quantity > 1) {
+    //   cartItems[index].quantity--;
+    // } else if (index !== -1 && cartItems[index].quantity === 1) {
+    //   cartItems.splice(index, 1);
+    // }
+
+    setCartItems((prevState) =>
+      prevState
+        .map((item) =>
+          item.id === itemId ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
   return (
     <>
+      {console.log("cartItems => ", cartItems)}
       <itemsContext.Provider
-        value={{ products: filteredProducts, loading, error, addFiltersHandle }}
+        value={{
+          products: filteredProducts,
+          loading,
+          error,
+          cartItems,
+          addFiltersHandle,
+          addToCartHandle,
+          removeFromCartHandle,
+          increaseQuantityHandle,
+          decreaseQuantityHandle,
+        }}
       >
         {children}
       </itemsContext.Provider>

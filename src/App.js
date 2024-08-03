@@ -1,17 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Navbar } from "./components/Navbar";
-import { AuthContextProvider } from "./customContexts/authContext";
-import { ItemsContextProvider } from "./customContexts/itemsContext";
-import { useProtectedRoute } from "./customHooks/useProtectedRoute";
-
-import "./App.css";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Cart } from "./pages/Cart";
 import { Orders } from "./pages/Orders";
+import { AuthContextProvider } from "./customContexts/authContext";
+import { ItemsContextProvider } from "./customContexts/itemsContext";
+import { useProtectedRoute } from "./customHooks/useProtectedRoute";
+import "./App.css";
+
 const App = () => {
-  console.log("register => ", useProtectedRoute(<Register />));
   const router = createBrowserRouter([
     {
       path: "/",
@@ -21,7 +20,7 @@ const App = () => {
         { path: "/login", element: <Login /> },
         {
           path: "/register",
-          element: useProtectedRoute(<Register />),
+          element: <Register />,
         },
         {
           path: "/orders",

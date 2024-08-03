@@ -1,0 +1,16 @@
+.bgContainer {
+  align-items: center;
+  padding: 0 8rem 0 9rem;
+  position: relative;
+}
+.purchaseContainer {
+  width: 16%;
+  margin-top: 10rem;
+  position: fixed;
+  top: 10;
+  left: 0;
+}
+.mainContainer {
+  width: 78%;
+  margin: 0 auto;
+}

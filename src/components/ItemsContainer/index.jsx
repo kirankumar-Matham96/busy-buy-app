@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { ItemCard } from "../ItemCard";
 import cardContainerStyles from "./index.module.css";
-import { useItems } from "../../customContexts/itemsContext";
 
-export const ItemsContainer = ({ searchTerm }) => {
-  const { products, loading, error } = useItems();
-
+export const ItemsContainer = ({
+  searchTerm = "",
+  products = [],
+  loading = false,
+  error = null,
+  isCart = false,
+}) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
@@ -14,6 +17,8 @@ export const ItemsContainer = ({ searchTerm }) => {
         products.filter((item) => item.title.toLowerCase().includes(searchTerm))
       );
   }, [products, searchTerm]);
+
+  useEffect(() => {}, [products]);
 
   return (
     <>
@@ -28,7 +33,7 @@ export const ItemsContainer = ({ searchTerm }) => {
         <div className={cardContainerStyles.container}>
           {filteredProducts &&
             filteredProducts.map((item) => {
-              return <ItemCard key={item.id} item={item} />;
+              return <ItemCard key={item.id} item={item} isCart={isCart} />;
             })}
         </div>
       )}
