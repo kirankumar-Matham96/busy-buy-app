@@ -3,6 +3,8 @@ import { Filter } from "../../components/Filter";
 import { ItemsContainer } from "../../components/ItemsContainer";
 import homeStyles from "./index.module.css";
 import { useItems } from "../../customContexts/itemsContext";
+import { LoaderSpinner } from "../../components/LoaderSpinner";
+import { Toaster } from "../../components/Toaster";
 
 export const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,6 +17,7 @@ export const Home = () => {
 
   return (
     <div className={homeStyles.bgContainer}>
+      <Toaster />
       <div className={homeStyles.filterContainer}>
         <Filter />
       </div>
@@ -28,12 +31,15 @@ export const Home = () => {
           />
         </div>
         <div>
-          <ItemsContainer
-            searchTerm={searchTerm}
-            products={products}
-            loading={loading}
-            error={error}
-          />
+          {loading ? (
+            <LoaderSpinner />
+          ) : (
+            <ItemsContainer
+              searchTerm={searchTerm}
+              products={products}
+              error={error}
+            />
+          )}
         </div>
       </div>
     </div>

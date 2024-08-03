@@ -34,7 +34,6 @@ export const useFirestoreAuth = () => {
     setError(false);
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      console.log("Signed Up!");
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -47,8 +46,6 @@ export const useFirestoreAuth = () => {
     setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      console.log("Signed In!");
-      // setLoggedIn(true);
       setLoading(false);
       return true;
     } catch (error) {
@@ -63,8 +60,6 @@ export const useFirestoreAuth = () => {
     setLoading(true);
     try {
       await signOut(auth);
-      // setLoggedIn(false);
-      console.log("Signed Out!");
       setLoading(false);
     } catch (error) {
       setLoading(false);

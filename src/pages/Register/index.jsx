@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../customContexts/authContext";
 import loginStyles from "./index.module.css";
+import { LoaderSpinner } from "../../components/LoaderSpinner";
+import { Toaster } from "../../components/Toaster";
 
 export const Register = () => {
   const [email, setEmail] = useState("");
@@ -39,9 +41,10 @@ export const Register = () => {
   return (
     <>
       {loading ? (
-        <div>Loading...</div>
+        <LoaderSpinner />
       ) : (
         <div className={loginStyles.container}>
+          <Toaster />
           <p className={loginStyles.error}>{error}</p>
           <h1 className={loginStyles.heading}>Sign Up</h1>
           <form className={loginStyles.form} onSubmit={formSubmitHandle}>

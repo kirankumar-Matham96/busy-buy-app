@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 // import { useFirestoreAuth } from "../../customHooks/useFirestoreAuth";
 import { useAuth } from "../../customContexts/authContext";
 import loginStyles from "./index.module.css";
+import { LoaderSpinner } from "../../components/LoaderSpinner";
+import { Toaster } from "../../components/Toaster";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -29,9 +31,10 @@ export const Login = () => {
   return (
     <>
       {loading ? (
-        <div>Loading...</div>
+        <LoaderSpinner />
       ) : (
         <div className={loginStyles.container}>
+          <Toaster />
           <p className={loginStyles.error}>{error}</p>
           <h1 className={loginStyles.heading}>Sign In</h1>
           <form className={loginStyles.form} onSubmit={formSubmitHandle}>

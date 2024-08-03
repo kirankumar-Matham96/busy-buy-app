@@ -1,27 +1,21 @@
 import React, { useEffect } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
-// import { useFirestoreAuth } from "../../customHooks/useFirestoreAuth";
 import { useAuth } from "../../customContexts/authContext";
 import navStyles from "./index.module.css";
 
 export const Navbar = () => {
-  const { loggedIn, loading, logOut } = useAuth();
-  console.log("loggedIn ===> ", loggedIn);
+  const { loggedIn, logOut } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("loggedIn in nav => ", loggedIn);
-  }, [loggedIn]);
+  useEffect(() => {}, [loggedIn]);
 
   const logoutHandle = () => {
-    // setLoggedIn(false);
     logOut();
     navigate("/");
   };
 
   return (
     <>
-      {console.log("loggedIn => ", loggedIn)}
       <div className={navStyles.container}>
         <div>
           <Link to="/">
@@ -83,7 +77,6 @@ export const Navbar = () => {
           )}
         </div>
       </div>
-      {loading ? "Loading..." : null}
       <Outlet />
     </>
   );

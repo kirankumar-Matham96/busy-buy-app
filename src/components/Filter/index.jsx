@@ -2,20 +2,14 @@ import React, { useState, useEffect } from "react";
 import filterStyles from "./index.module.css";
 import { useItems } from "../../customContexts/itemsContext";
 
-const categories = [
-  "Men's Clothing",
-  "Women's Clothing",
-  "Jewelery",
-  "Electronics",
-];
-
 export const Filter = () => {
-  const { addFiltersHandle } = useItems();
+  const { addFiltersHandle, categories } = useItems();
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [priceFilter, setPriceFilter] = useState(1000);
 
   useEffect(() => {
-    addFiltersHandle(selectedCategories);
-  }, [selectedCategories]);
+    addFiltersHandle(selectedCategories, priceFilter);
+  }, [selectedCategories, priceFilter]);
 
   const selectFilterHandle = (e) => {
     if (e.target.checked) {
@@ -32,12 +26,24 @@ export const Filter = () => {
     }
   };
 
+  const priceChangeHandle = (e) => {
+    setPriceFilter(e.target.value);
+    console.log("filter price => ", e.target.value);
+  };
+
   return (
     <div className={filterStyles.filter}>
       <div className={filterStyles.priceStyle}>
         <h3 className={filterStyles.heading}>Filter</h3>
-        <p>Price: </p>
-        <input type="range" step="10" />
+        <p>Price: {priceFilter}</p>
+        <input
+          value={priceFilter}
+          onChange={priceChangeHandle}
+          type="range"
+          step="10"
+          min="50"
+          max="1000"
+        />
       </div>
       <div className={filterStyles.filterCategoryContainer}>
         <h3 className={filterStyles.heading}>Category</h3>
@@ -49,7 +55,7 @@ export const Filter = () => {
               onChange={selectFilterHandle}
             />
             &nbsp;&nbsp;
-            {category}
+            <span className={filterStyles.categoryText}>{category}</span>
           </label>
         ))}
       </div>

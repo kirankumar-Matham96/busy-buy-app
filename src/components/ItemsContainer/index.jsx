@@ -5,7 +5,6 @@ import cardContainerStyles from "./index.module.css";
 export const ItemsContainer = ({
   searchTerm = "",
   products = [],
-  loading = false,
   error = null,
   isCart = false,
 }) => {
@@ -27,16 +26,14 @@ export const ItemsContainer = ({
           <h1>{error}</h1>
         </div>
       )}
-      {!error && loading ? (
-        "Loading..."
-      ) : (
+      {
         <div className={cardContainerStyles.container}>
           {filteredProducts &&
             filteredProducts.map((item) => {
               return <ItemCard key={item.id} item={item} isCart={isCart} />;
             })}
         </div>
-      )}
+      }
     </>
   );
 };

@@ -1,0 +1,12 @@
+.loaderContainer {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  border: 1px solid red;
+  justify-content: center;
+  /* align-items: center; */
+}
