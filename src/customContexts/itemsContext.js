@@ -13,9 +13,16 @@ import {
 import { notifySuccess, notifyInfo, notifyDanger } from "../components/Toaster";
 import { useAuth } from "./authContext";
 
+// create a context for items management
 const itemsContext = createContext();
+
+// custom hook to use the items context
 export const useItems = () => useContext(itemsContext);
 
+/**
+ * Fetches data from a remote API (fake store API)
+ * @returns {Promise<Array>} - A promise that resolves to an array of products
+ */
 const getData = async () => {
   try {
     const resp = await fetch("https://fakestoreapi.com/products");
@@ -26,6 +33,11 @@ const getData = async () => {
   }
 };
 
+/**
+ * Provider component for items context
+ * @param {*} param - Contains children components that will have access to the items context
+ * @returns JSX - Provides items context to its children
+ */
 export const ItemsContextProvider = ({ children }) => {
   const { currentUser } = useAuth();
   const [products, setProducts] = useState([]);
@@ -37,6 +49,10 @@ export const ItemsContextProvider = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [orders, setOrders] = useState([]);
 
+  /**
+   * Fetches product data from the API and updates the state.
+   * This effect runs once when the component mounts.
+   */
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -54,8 +70,14 @@ export const ItemsContextProvider = ({ children }) => {
     fetchProducts();
   }, []);
 
+  /**
+   * Fetches orders and cart items for the current user from Firestore.
+   * This effect runs whenever `currentUser` changes.
+   */
   useEffect(() => {
     setLoading(true);
+
+    // fetch orders from Firestore
     const fetchOrders = async () => {
       try {
         const q = query(
@@ -77,6 +99,7 @@ export const ItemsContextProvider = ({ children }) => {
       }
     };
 
+    // fetch cart items from Firestore
     const fetchCartItems = async () => {
       setLoading(true);
       try {
@@ -105,6 +128,10 @@ export const ItemsContextProvider = ({ children }) => {
     fetchCartItems();
   }, [currentUser]);
 
+  /**
+   * Updates the list of categories based on the fetched products.
+   * This effect runs whenever `products` changes.
+   */
   useEffect(() => {
     setLoading(true);
 
@@ -115,6 +142,11 @@ export const ItemsContextProvider = ({ children }) => {
     setLoading(false);
   }, [products]);
 
+  /**
+   * Applies filters to the products and updates the filtered products state.
+   * @param {Array} filters - Array of selected category filters.
+   * @param {number} filterPrice - Maximum price to filter products.
+   */
   const addFiltersHandle = (filters, filterPrice) => {
     const filtered = products.filter((product) =>
       filters.length > 0
@@ -126,7 +158,10 @@ export const ItemsContextProvider = ({ children }) => {
     );
   };
 
-  // Firestore Operations
+  /**
+   * Updates the cart items in Firestore.
+   * @param {Array} cartItems - Array of cart items to update.
+   */
   const updateCartFirestore = async (cartItems) => {
     try {
       await setDoc(doc(db, "cart", currentUser), { cartItems });
@@ -135,6 +170,10 @@ export const ItemsContextProvider = ({ children }) => {
     }
   };
 
+  /**
+   * Adds an item to the cart and updates the Firestore and state.
+   * @param {string} itemId - ID of the item to add to the cart.
+   */
   const addToCartHandle = (itemId) => {
     const newItem = products.find((item) => item.id === itemId);
 
@@ -163,6 +202,10 @@ export const ItemsContextProvider = ({ children }) => {
     });
   };
 
+  /**
+   * Removes an item from the cart and updates the Firestore and state.
+   * @param {string} itemId - ID of the item to remove from the cart.
+   */
   const removeFromCartHandle = (itemId) => {
     setCartItems((prevCartItems) => {
       const index = prevCartItems.findIndex((item) => item.id === itemId);
@@ -185,6 +228,10 @@ export const ItemsContextProvider = ({ children }) => {
     });
   };
 
+  /**
+   * Increases the quantity of an item in the cart and updates the Firestore and state.
+   * @param {string} itemId - ID of the item to increase quantity for.
+   */
   const increaseQuantityHandle = (itemId) => {
     setCartItems((prevCartItems) => {
       const updatedCartItems = prevCartItems.map((item) =>
@@ -201,6 +248,10 @@ export const ItemsContextProvider = ({ children }) => {
     });
   };
 
+  /**
+   * Decreases the quantity of an item in the cart and updates the Firestore and state.
+   * @param {string} itemId - ID of the item to decrease quantity for.
+   */
   const decreaseQuantityHandle = (itemId) => {
     setCartItems((prevCartItems) => {
       const updatedCartItems = prevCartItems
@@ -219,6 +270,10 @@ export const ItemsContextProvider = ({ children }) => {
     });
   };
 
+  /**
+   * Creates a new order and adds it to Firestore.
+   * @returns {Promise<boolean>} - A promise that resolves to true if the order was placed successfully, false otherwise.
+   */
   const createOrderHandle = async () => {
     try {
       if (cartItems.length === 0) {
@@ -239,6 +294,10 @@ export const ItemsContextProvider = ({ children }) => {
     }
   };
 
+  /**
+   * Handles the purchase process: creates an order, clears the cart, and updates Firestore.
+   * @returns {Promise<void>}
+   */
   const purchaseHandle = async () => {
     const isOrderPlaced = await createOrderHandle();
     if (isOrderPlaced) {

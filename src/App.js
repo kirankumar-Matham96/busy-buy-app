@@ -11,6 +11,7 @@ import { useProtectedRoute } from "./customHooks/useProtectedRoute";
 import "./App.css";
 
 const App = () => {
+  // creating router for navigating through the pages
   const router = createBrowserRouter([
     {
       path: "/",

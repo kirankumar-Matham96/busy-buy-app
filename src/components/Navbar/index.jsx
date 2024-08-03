@@ -1,16 +1,23 @@
-import React, { useEffect } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../customContexts/authContext";
 import navStyles from "./index.module.css";
 
+/**
+ * JSX component to render the navigation bar.
+ * It includes links for home, orders, cart, and sign in/sign out based on authentication status.
+ * @returns JSX - Navbar component
+ */
 export const Navbar = () => {
+  // retrieving authentication status and logOut function from context
   const { loggedIn, logOut } = useAuth();
+  // hook to programmatically navigate
   const navigate = useNavigate();
 
-  useEffect(() => {}, [loggedIn]);
-
+  // handler function for logging out the user
   const logoutHandle = () => {
+    // calling logOut function from context
     logOut();
+    // redirect to home page after logout
     navigate("/");
   };
 
@@ -38,6 +45,7 @@ export const Navbar = () => {
 
           {loggedIn && (
             <>
+              {/* Links shown only when user is logged in */}
               <Link to="/orders">
                 <button className={navStyles.btn}>
                   <img
@@ -82,6 +90,7 @@ export const Navbar = () => {
         </div>
       </div>
       <Outlet />
+      {/* Outlet for nested routes */}
     </>
   );
 };

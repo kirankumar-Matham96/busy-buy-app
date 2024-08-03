@@ -8,14 +8,24 @@ import {
 } from "firebase/auth";
 import { app } from "../config/firestore.config";
 
+/**
+ * Custom hook for handling Firebase authentication operations.
+ * @returns {Object} - Contains authentication methods and state variables.
+ */
 export const useFirestoreAuth = () => {
   const auth = getAuth(app);
 
+  // state variables
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
 
+   /**
+   * Effect hook to monitor authentication state changes.
+   * Sets up a listener to handle user login and logout events.
+   * @returns {Function} - Cleanup function to unsubscribe from the auth state listener.
+   */
   useEffect(() => {
     setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -30,6 +40,11 @@ export const useFirestoreAuth = () => {
     return () => unsubscribe();
   }, [auth]);
 
+   /**
+   * Signs up a new user with email and password.
+   * @param {string} email - User's email address.
+   * @param {string} password - User's password.
+   */
   const signUp = async (email, password) => {
     setLoading(true);
     setError(false);
@@ -43,6 +58,12 @@ export const useFirestoreAuth = () => {
     }
   };
 
+  /**
+   * Signs in an existing user with email and password.
+   * @param {string} email - User's email address.
+   * @param {string} password - User's password.
+   * @returns {boolean} - Returns true if sign-in is successful, otherwise false.
+   */
   const signIn = async (email, password) => {
     setLoading(true);
     try {
@@ -57,6 +78,9 @@ export const useFirestoreAuth = () => {
     }
   };
 
+  /**
+   * To log out the current user.
+   */
   const logOut = async () => {
     setLoading(true);
     try {

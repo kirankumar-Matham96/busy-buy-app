@@ -1,10 +1,18 @@
-import React from "react";
-import cardStyles from "./index.module.css";
 import { useItems } from "../../customContexts/itemsContext";
+import cardStyles from "./index.module.css";
 
+/**
+ * JSX component for displaying an item card.
+ * This component can be used for both displaying items and cart items.
+ * @param {Object} item - The item object containing details like id, title, price, image, and quantity.
+ * @param {boolean} isCart - Flag to determine if the item is displayed in the cart.
+ * @returns JSX - ItemCard component
+ */
 export const ItemCard = ({ item, isCart = false }) => {
+  // destructure item properties
   const { id, title, price, image, quantity } = item;
 
+  // Destructure functions for handling cart actions from useItems context
   const {
     addToCartHandle,
     removeFromCartHandle,
@@ -15,6 +23,7 @@ export const ItemCard = ({ item, isCart = false }) => {
   return (
     <div className={cardStyles.card}>
       <img className={cardStyles.image} src={image} alt={title} />
+      {/* display item title, truncate if longer than 40 characters */}
       <p className={cardStyles.title}>
         {title.length > 40 ? title.slice(0, 40) + "..." : title}
       </p>

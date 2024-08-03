@@ -1,7 +1,12 @@
-import purchaseStyles from "./index.module.css";
 import { useItems } from "../../customContexts/itemsContext";
+import purchaseStyles from "./index.module.css";
 
+/**
+ * JSX component for displaying the total price and a purchase button.
+ * @returns JSX - Purchase component
+ */
 export const Purchase = () => {
+   // retrieve totalPrice and purchaseHandle function from items context (custom hook)
   const { totalPrice, purchaseHandle } = useItems();
 
   return (

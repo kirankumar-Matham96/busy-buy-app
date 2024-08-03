@@ -1,26 +1,36 @@
-import React from "react";
 import { ItemsContainer } from "../../components/ItemsContainer";
+import { LoaderSpinner } from "../../components/LoaderSpinner";
+import { Toaster } from "../../components/Toaster";
+import { Purchase } from "../../components/Purchase";
 import { useItems } from "../../customContexts/itemsContext";
 import cartStyles from "./index.module.css";
-import { Purchase } from "../../components/Purchase";
-import { Toaster } from "../../components/Toaster";
-// use loader after adding firestore
 
+/**
+ * JSX component that renders the cart page
+ * @returns JSX - cart page component
+ */
 export const Cart = () => {
-  const { cartItems } = useItems();
+  // getting data from items context with custom hook
+  const { cartItems, loading } = useItems();
   return (
-    <div className={cartStyles.bgContainer}>
-      <Toaster />
-      <div className={cartStyles.purchaseContainer}>
-        <Purchase />
-      </div>
-      <div className={cartStyles.mainContainer}>
-        {cartItems.length > 0 ? (
-          <ItemsContainer products={cartItems} isCart={true} />
-        ) : (
-          <h1 className={cartStyles.emptyMessage}>Add some items!</h1>
-        )}
-      </div>
-    </div>
+    <>
+      {loading ? (
+        <LoaderSpinner />
+      ) : (
+        <div className={cartStyles.bgContainer}>
+          <Toaster />
+          <div className={cartStyles.purchaseContainer}>
+            <Purchase />
+          </div>
+          <div className={cartStyles.mainContainer}>
+            {cartItems.length > 0 ? (
+              <ItemsContainer products={cartItems} isCart={true} />
+            ) : (
+              <h1 className={cartStyles.emptyMessage}>Add some items!</h1>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
