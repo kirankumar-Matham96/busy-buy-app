@@ -38,3 +38,35 @@
   font-size: 1.3rem;
   border-radius: 8px;
 }
+.priceContainer {
+  display: flex;
+  padding-right: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+.controlsContainer {
+  display: flex;
+  align-items: center;
+}
+.controlBtn {
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 22rem;
+  outline: none;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+
+.controlBtn > img {
+  width: 100%;
+}
+
+.controlBtn:hover {
+  transform: scale(90%, 90%);
+}
+.quantity {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 0 1rem;
+}

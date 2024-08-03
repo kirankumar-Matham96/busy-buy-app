@@ -28,7 +28,6 @@ export const Filter = () => {
 
   const priceChangeHandle = (e) => {
     setPriceFilter(e.target.value);
-    console.log("filter price => ", e.target.value);
   };
 
   return (

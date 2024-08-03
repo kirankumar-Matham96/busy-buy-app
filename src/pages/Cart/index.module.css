@@ -14,3 +14,8 @@
   width: 78%;
   margin: 0 auto;
 }
+.emptyMessage {
+  color: rgb(1, 138, 201);
+  padding-top: 3rem;
+  text-align: center;
+}

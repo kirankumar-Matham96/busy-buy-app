@@ -36,25 +36,29 @@ export const Navbar = () => {
             </button>
           </Link>
 
-          <Link to="/orders">
-            <button className={navStyles.btn}>
-              <img
-                src="https://cdn-icons-png.flaticon.com/128/9422/9422816.png"
-                alt="orders"
-              />
-              My Orders
-            </button>
-          </Link>
+          {loggedIn && (
+            <>
+              <Link to="/orders">
+                <button className={navStyles.btn}>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/9422/9422816.png"
+                    alt="orders"
+                  />
+                  My Orders
+                </button>
+              </Link>
 
-          <Link to="/cart">
-            <button className={navStyles.btn}>
-              <img
-                src="https://cdn-icons-png.flaticon.com/128/4290/4290854.png"
-                alt="cart"
-              />
-              Cart
-            </button>
-          </Link>
+              <Link to="/cart">
+                <button className={navStyles.btn}>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/4290/4290854.png"
+                    alt="cart"
+                  />
+                  Cart
+                </button>
+              </Link>
+            </>
+          )}
 
           {!loggedIn ? (
             <Link to="/login">

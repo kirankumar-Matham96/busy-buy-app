@@ -5,6 +5,10 @@
   background-color: #efefef;
   border-radius: 8px;
   box-shadow: 0 0 5px -5px #dfdfdf;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .filterCategoryContainer {
   margin-top: 1.5rem;
@@ -19,4 +23,17 @@
 .heading {
   text-align: center;
   margin-bottom: 1rem;
+}
+.price {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.btn {
+  border: none;
+  border-radius: 8px;
+  background-color: purple;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
 }

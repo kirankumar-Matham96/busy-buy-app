@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 // import { useFirestoreAuth } from "../../customHooks/useFirestoreAuth";
 import { useAuth } from "../../customContexts/authContext";
@@ -9,8 +9,14 @@ import { Toaster } from "../../components/Toaster";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signIn, loading, error } = useAuth();
+  const { signIn, loading, error, currentUser } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, [currentUser]);
 
   const changeEmailHandle = (e) => {
     setEmail(e.target.value);

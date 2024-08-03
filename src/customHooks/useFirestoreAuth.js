@@ -13,14 +13,15 @@ export const useFirestoreAuth = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
   const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState("");
 
   useEffect(() => {
     setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setLoggedIn(true);
+        setCurrentUser(user.email);
       } else {
         setLoggedIn(false);
       }
@@ -60,6 +61,7 @@ export const useFirestoreAuth = () => {
     setLoading(true);
     try {
       await signOut(auth);
+      setCurrentUser("");
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -68,5 +70,14 @@ export const useFirestoreAuth = () => {
     }
   };
 
-  return { signUp, signIn, logOut, setLoggedIn, loading, error, loggedIn };
+  return {
+    signUp,
+    signIn,
+    logOut,
+    setLoggedIn,
+    loading,
+    error,
+    loggedIn,
+    currentUser,
+  };
 };

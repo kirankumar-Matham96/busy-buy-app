@@ -8,12 +8,29 @@ export const useAuth = () => {
 };
 
 export const AuthContextProvider = ({ children }) => {
-  const { signUp, signIn, logOut, setLoggedIn, loading, error, loggedIn } =
-    useFirestoreAuth();
+  const {
+    signUp,
+    signIn,
+    logOut,
+    setLoggedIn,
+    loading,
+    error,
+    loggedIn,
+    currentUser,
+  } = useFirestoreAuth();
 
   return (
     <authContext.Provider
-      value={{ signUp, signIn, logOut, setLoggedIn, loading, error, loggedIn }}
+      value={{
+        signUp,
+        signIn,
+        logOut,
+        setLoggedIn,
+        loading,
+        error,
+        loggedIn,
+        currentUser,
+      }}
     >
       {children}
     </authContext.Provider>

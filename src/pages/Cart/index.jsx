@@ -15,7 +15,11 @@ export const Cart = () => {
         <Purchase />
       </div>
       <div className={cartStyles.mainContainer}>
-        <ItemsContainer products={cartItems} isCart={true} />
+        {cartItems.length > 0 ? (
+          <ItemsContainer products={cartItems} isCart={true} />
+        ) : (
+          <h1 className={cartStyles.emptyMessage}>Add some items!</h1>
+        )}
       </div>
     </div>
   );

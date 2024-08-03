@@ -18,13 +18,25 @@ export const ItemCard = ({ item, isCart = false }) => {
       <p className={cardStyles.title}>
         {title.length > 40 ? title.slice(0, 40) + "..." : title}
       </p>
-      <div>
+      <div className={cardStyles.priceContainer}>
         <p className={cardStyles.price}>₹ {price}</p>
         {isCart && (
-          <div>
-            <button onClick={() => decreaseQuantityHandle(id)}>-</button>
+          <div className={cardStyles.controlsContainer}>
+            <button className={cardStyles.controlBtn} onClick={() => decreaseQuantityHandle(id)}>
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/9513/9513363.png"
+                alt="decrease"
+              />
+            </button>
+            <span className={cardStyles.quantity}>
             {quantity}
-            <button onClick={() => increaseQuantityHandle(id)}>+</button>
+            </span>
+            <button className={cardStyles.controlBtn} onClick={() => increaseQuantityHandle(id)}>
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/32/32360.png"
+                alt="increase"
+              />
+            </button>
           </div>
         )}
       </div>
