@@ -1,4 +1,4 @@
-# Busy Buy
+# Busy Buy (With Context API)
 
 An easy-to-use online store where you can shop for various products. It is a modern e-commerce platform with various features aimed at providing a seamless shopping experience.
 
